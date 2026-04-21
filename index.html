@@ -3,10 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGS Belgelendirme - Anasayfa</title>
-    <meta name="description" content="AGS, belgelendirme hizmeti alanında faaliyet göstermek üzere kurulmuştur. ISO 9001, ISO 14001, OHSAS 18001 ve daha fazlası.">
+    <title>Kalicert Belgelendirme - Kalite ve Güvenilirlikte Çözüm Ortağınız</title>
+    <meta name="description" content="Kalicert Belgelendirme; ISO 9001, ISO 14001, ISO 27001, AS 9100, TURKAK onaylı belgeler ve daha birçok alanda profesyonel belgelendirme hizmetleri sunar.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Slider için ek stiller */
+        .hero-slider {
+            position: relative;
+            height: 650px;
+            overflow: hidden;
+        }
+        .slides-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            display: flex;
+            align-items: center;
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,40,80,0.85) 0%, rgba(0,20,40,0.6) 100%);
+            z-index: 1;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            color: var(--white);
+            padding: 0 20px;
+            animation: slideInUp 0.8s ease;
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-content h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        .slide-content p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        }
+        .slide-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+        }
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .slider-dot:hover {
+            background: rgba(255,255,255,0.8);
+        }
+        .slider-dot.active {
+            background: var(--accent-color);
+            width: 30px;
+            border-radius: 20px;
+        }
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+        }
+        .slider-arrow:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .slider-arrow.prev { left: 30px; }
+        .slider-arrow.next { right: 30px; }
+
+        /* İstatistik Bölümü */
+        .stats-section {
+            padding: 60px 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-item {
+            padding: 30px 20px;
+            border-radius: var(--border-radius-lg);
+            background: var(--bg-light);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .stat-icon i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        .stat-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Haberler Slider Bölümü */
+        .news-section {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+        .news-section .section-header {
+            margin-bottom: 40px;
+        }
+        .news-slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .news-slider {
+            overflow: hidden;
+            margin: 0 -15px;
+        }
+        .news-slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .news-card {
+            flex: 0 0 calc(33.333% - 30px);
+            margin: 0 15px;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .news-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+        .news-content {
+            padding: 25px;
+        }
+        .news-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+        .news-date i {
+            color: var(--accent-color);
+        }
+        .news-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .news-excerpt {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .news-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-link:hover {
+            gap: 12px;
+            color: var(--primary-color);
+        }
+        .news-slider-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+        .news-arrow {
+            width: 45px;
+            height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+        .news-arrow:hover {
+            background: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+        .news-dots {
+            display: flex;
+            gap: 8px;
+        }
+        .news-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .news-dot.active {
+            background: var(--accent-color);
+            width: 25px;
+            border-radius: 10px;
+        }
+        .view-all-news {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .slide-content h2 { font-size: 2.5rem; }
+            .news-card { flex: 0 0 calc(50% - 30px); }
+        }
+        @media (max-width: 768px) {
+            .hero-slider { height: 550px; }
+            .slide-content h2 { font-size: 2rem; }
+            .slide-content p { font-size: 1.1rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .slider-arrow { display: none; }
+            .news-card { flex: 0 0 calc(100% - 30px); }
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER START -->
@@ -15,10 +343,10 @@
             <div class="container header-top-inner">
                 <div class="logo-wrapper">
                     <a href="index.html" class="logo-link">
-                        <img src="images/logo.png" alt="AGS Belgelendirme Logo" class="logo-img">
+                        <img src="images/logo.png" alt="Kalicert Belgelendirme Logo" class="logo-img">
                     </a>
                     <div class="logo-text">
-                        <div class="company-name">AGS BELGELENDİRME</div>
+                        <div class="company-name">KALİCERT BELGELENDİRME</div>
                         <div class="company-slogan">Güvenilir Kalite Çözümleri</div>
                     </div>
                 </div>
@@ -30,7 +358,7 @@
                         </form>
                     </div>
                     <div class="header-phone">
-                        <a href="tel:02164895662"><i class="fas fa-phone-alt"></i> <span>0216 489 56 62</span></a>
+                        <a href="tel:02164890803"><i class="fas fa-phone-alt"></i> <span>0216 489 08 03</span></a>
                     </div>
                 </div>
                 <button class="mobile-toggle" id="mobileToggle">
@@ -56,6 +384,8 @@
                             <li><a href="belge-detay/haccp.html">HACCP / ISO 22000</a></li>
                             <li><a href="belge-detay/ce-marking.html">CE Marking</a></li>
                             <li><a href="belge-detay/iso-ts-16949.html">ISO/TS 16949</a></li>
+                            <li><a href="belge-detay/as-9100.html">AS 9100</a></li>
+                            <li><a href="belge-detay/turkak-onayli-belgeler.html">TURKAK Onaylı Belgeler</a></li>
                         </ul>
                     </li>
                     <li><a href="iletisim.html">İLETİŞİM</a></li>
@@ -67,18 +397,233 @@
 
     <!-- MAIN CONTENT START -->
     <main>
-        <!-- HERO SLIDER -->
-        <section class="hero-section">
-            <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,40,80,0.7), rgba(0,20,40,0.8)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
-                <div class="container">
-                    <div class="hero-content">
-                        <h1>AGS, BELGELENDİRME HİZMETİ ALANINDA FAALİYET GÖSTERMEK ÜZERE KURULMUŞTUR.</h1>
-                        <p>Kalite konusunda denetim ve yöneticilik görevleri yapmış tecrübeli ekibimizle, uluslararası standartlarda belgelendirme hizmetleri sunuyoruz. Kuruluşunuzun rekabet gücünü artırmak ve sürdürülebilir başarı sağlamak için yanınızdayız.</p>
-                        <div class="hero-buttons">
-                            <a href="iletisim.html" class="btn btn-primary">Teklif Alın</a>
-                            <a href="hizmetlerimiz.html" class="btn btn-outline">Hizmetlerimiz</a>
+        <!-- HERO SLIDER - 7 SLIDE -->
+        <section class="hero-slider">
+            <div class="slides-container">
+                <!-- Slide 1: Bizimle Güvendesiniz -->
+                <div class="slide active" style="background-image: url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <h2>Bizimle Güvendesiniz</h2>
+                            <p>Kalicert Belgelendirme olarak, TURKAK onaylı belgelerimizle işletmenize uluslararası güvence sağlıyoruz. Deneyimli kadromuzla her adımda yanınızdayız.</p>
+                            <div class="slide-buttons">
+                                <a href="iletisim.html" class="btn btn-primary">Teklif Alın</a>
+                                <a href="hakkimizda.html" class="btn btn-outline">Bizi Tanıyın <i class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <!-- Slide 2: Kopmasın diye denetliyoruz -->
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <h2>Kopmasın Diye Denetliyoruz</h2>
+                            <p>Kalite zincirinizin her halkasını titizlikle denetliyor, süreçlerinizin kesintisiz ve standartlara uygun işlemesini sağlıyoruz.</p>
+                            <div class="slide-buttons">
+                                <a href="hizmetlerimiz.html" class="btn btn-primary">Hizmetlerimiz</a>
+                                <a href="iletisim.html" class="btn btn-outline">İletişim <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3: Bizimle yeni pazarlar keşfedin -->
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <h2>Bizimle Yeni Pazarlar Keşfedin</h2>
+                            <p>Uluslararası geçerliliğe sahip belgelerimizle ürün ve hizmetlerinizi dünya pazarlarına açın. Sınırları birlikte aşalım.</p>
+                            <div class="slide-buttons">
+                                <a href="belge-detay/ce-marking.html" class="btn btn-primary">CE Marking</a>
+                                <a href="kalite-belgeleri.html" class="btn btn-outline">Tüm Belgeler <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 4: Bizimle bereketli işleriniz olsun -->
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/2284166/pexels-photo-2284166.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <h2>Bizimle Bereketli İşleriniz Olsun</h2>
+                            <p>Gıda güvenliğinden iş sağlığına, kaliteden çevreye tüm belgelendirme süreçlerinizde bereketli kazançlar elde edin.</p>
+                            <div class="slide-buttons">
+                                <a href="belge-detay/haccp.html" class="btn btn-primary">HACCP Belgesi</a>
+                                <a href="iletisim.html" class="btn btn-outline">Bilgi Alın <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 5: Bizimle Kaliteli hizmetin keyfini çıkarın -->
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <h2>Bizimle Kaliteli Hizmetin Keyfini Çıkarın</h2>
+                            <p>Müşteri memnuniyeti odaklı yaklaşımımızla belgelendirme sürecinizi keyifli bir deneyime dönüştürüyoruz.</p>
+                            <div class="slide-buttons">
+                                <a href="referanslarimiz.html" class="btn btn-primary">Referanslarımız</a>
+                                <a href="iletisim.html" class="btn btn-outline">Bize Ulaşın <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 6: Bizimle işinize değer katın -->
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/38070/pexels-photo-38070.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <h2>Bizimle İşinize Değer Katın</h2>
+                            <p>ISO 9001, ISO 14001, ISO 27001 ve daha fazlasıyla işletmenizin marka değerini ve rekabet gücünü artırın.</p>
+                            <div class="slide-buttons">
+                                <a href="belge-detay/iso-9001-2015.html" class="btn btn-primary">ISO 9001</a>
+                                <a href="hizmetlerimiz.html" class="btn btn-outline">Tüm Hizmetler <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 7: Bizimle şansa bırakmayın -->
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <h2>Bizimle Şansa Bırakmayın</h2>
+                            <p>Bilgi güvenliğinizi, iş sağlığınızı ve kalite standartlarınızı profesyonel ellerle güvence altına alın.</p>
+                            <div class="slide-buttons">
+                                <a href="belge-detay/iso-27001.html" class="btn btn-primary">ISO 27001</a>
+                                <a href="iletisim.html" class="btn btn-outline">Hemen Başlayın <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Okları -->
+            <div class="slider-arrow prev" id="prevSlide"><i class="fas fa-chevron-left"></i></div>
+            <div class="slider-arrow next" id="nextSlide"><i class="fas fa-chevron-right"></i></div>
+            <!-- Slider Noktaları -->
+            <div class="slider-nav" id="sliderDots"></div>
+        </section>
+
+        <!-- İSTATİSTİK BÖLÜMÜ -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-smile"></i></div>
+                        <div class="stat-number"><span class="counter" data-target="1250">0</span>+</div>
+                        <div class="stat-label">Mutlu Müşteri</div>
+                        <div class="stat-desc">Türkiye genelinde</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="stat-number"><span class="counter" data-target="3580">0</span>+</div>
+                        <div class="stat-label">Verilen Belge</div>
+                        <div class="stat-desc">TURKAK onaylı</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-number"><span class="counter" data-target="2840">0</span>+</div>
+                        <div class="stat-label">Tamamlanmış Proje</div>
+                        <div class="stat-desc">Başarıyla teslim</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-number"><span class="counter" data-target="25">0</span>+</div>
+                        <div class="stat-label">Uzman Kadro</div>
+                        <div class="stat-desc">Deneyimli denetçiler</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HABERLER SLIDER BÖLÜMÜ -->
+        <section class="news-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2>Haberler ve Duyurular</h2>
+                    <p>Kalicert Belgelendirme'den son gelişmeler ve sektör haberleri</p>
+                </div>
+                <div class="news-slider-container">
+                    <div class="news-slider" id="newsSlider">
+                        <div class="news-slider-wrapper" id="newsSliderWrapper">
+                            <!-- Haber 1 -->
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ISO 9001 Eğitimi">
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-date"><i class="far fa-calendar-alt"></i> 15 Nisan 2026</div>
+                                    <h3 class="news-title">ISO 9001:2026 Geçiş Süreci Eğitimleri Başladı</h3>
+                                    <p class="news-excerpt">ISO 9001 standardının yeni revizyonu için geçiş süreci eğitimlerimiz tüm hızıyla devam ediyor...</p>
+                                    <a href="haberler/iso-9001-2026-gecis-egitimi.html" class="news-link">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- Haber 2 -->
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600" alt="TURKAK Akreditasyon">
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-date"><i class="far fa-calendar-alt"></i> 2 Nisan 2026</div>
+                                    <h3 class="news-title">TURKAK Akreditasyon Kapsamımız Genişledi</h3>
+                                    <p class="news-excerpt">Kalicert Belgelendirme olarak TURKAK akreditasyon kapsamımıza yeni standartları ekledik...</p>
+                                    <a href="haberler/turkak-akreditasyon-kapsam-genisleme.html" class="news-link">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- Haber 3 -->
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="https://images.pexels.com/photos/1628086/pexels-photo-1628086.jpeg?auto=compress&cs=tinysrgb&w=600" alt="AS 9100 Belgelendirme">
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-date"><i class="far fa-calendar-alt"></i> 20 Mart 2026</div>
+                                    <h3 class="news-title">AS 9100 Havacılık Standardında Yeni Dönem</h3>
+                                    <p class="news-excerpt">Havacılık sektöründe kalite yönetim sistemi olan AS 9100 standardı için güncelleme yayınlandı...</p>
+                                    <a href="haberler/as-9100-havacilik-standardi-guncelleme.html" class="news-link">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- Haber 4 -->
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="https://images.pexels.com/photos/2284166/pexels-photo-2284166.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Gıda Güvenliği">
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-date"><i class="far fa-calendar-alt"></i> 5 Mart 2026</div>
+                                    <h3 class="news-title">ISO 22000:2025 Gıda Güvenliği Semineri Gerçekleştirildi</h3>
+                                    <p class="news-excerpt">İstanbul'da düzenlediğimiz ISO 22000 Gıda Güvenliği Yönetim Sistemi seminerine yoğun katılım oldu...</p>
+                                    <a href="haberler/iso-22000-gida-guvenligi-semineri.html" class="news-link">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- Haber 5 -->
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bilgi Güvenliği">
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-date"><i class="far fa-calendar-alt"></i> 18 Şubat 2026</div>
+                                    <h3 class="news-title">ISO 27001:2025 Bilgi Güvenliği Webinarı</h3>
+                                    <p class="news-excerpt">Bilgi güvenliği alanındaki son gelişmeleri ele aldığımız ücretsiz webinarımıza kayıtlar başladı...</p>
+                                    <a href="haberler/iso-27001-bilgi-guvenligi-webinar.html" class="news-link">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- Haber 6 -->
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="https://images.pexels.com/photos/38070/pexels-photo-38070.jpeg?auto=compress&cs=tinysrgb&w=600" alt="İş Güvenliği">
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-date"><i class="far fa-calendar-alt"></i> 1 Şubat 2026</div>
+                                    <h3 class="news-title">İş Sağlığı ve Güvenliğinde Yeni Düzenlemeler</h3>
+                                    <p class="news-excerpt">2026 yılı itibarıyla iş sağlığı ve güvenliği mevzuatında yapılan değişiklikleri sizler için derledik...</p>
+                                    <a href="haberler/is-sagligi-guvenligi-yeni-duzenlemeler.html" class="news-link">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Haberler Slider Kontrolleri -->
+                    <div class="news-slider-nav">
+                        <div class="news-arrow" id="newsPrev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="news-dots" id="newsDots"></div>
+                        <div class="news-arrow" id="newsNext"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+                <div class="view-all-news">
+                    <a href="haberler/tum-haberler.html" class="btn btn-secondary">Tüm Haberleri Görüntüle <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -87,46 +632,49 @@
         <section class="services-overview">
             <div class="container">
                 <div class="section-header text-center">
-                    <h2>Belgelendirme Hizmetlerimiz</h2>
-                    <p>Uluslararası standartlarda profesyonel belgelendirme çözümleri</p>
+                    <h2>Öne Çıkan Hizmetlerimiz</h2>
+                    <p>Geniş kapsamlı ve TURKAK onaylı belgelendirme çözümlerimizle işletmenizin standartlarını yükseltin.</p>
                 </div>
                 <div class="services-grid">
                     <div class="service-card">
                         <div class="service-icon"><i class="fas fa-certificate"></i></div>
                         <h3>ISO 9001:2015</h3>
                         <p>Kalite Yönetim Sistemi</p>
-                        <a href="belge-detay/iso-9001-2015.html" class="service-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        <a href="belge-detay/iso-9001-2015.html" class="service-link">İncele <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="service-card">
                         <div class="service-icon"><i class="fas fa-leaf"></i></div>
                         <h3>ISO 14001</h3>
                         <p>Çevre Yönetim Sistemi</p>
-                        <a href="belge-detay/iso-14001.html" class="service-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        <a href="belge-detay/iso-14001.html" class="service-link">İncele <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="service-card">
                         <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
                         <h3>ISO 27001</h3>
                         <p>Bilgi Güvenliği Yönetim Sistemi</p>
-                        <a href="belge-detay/iso-27001.html" class="service-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        <a href="belge-detay/iso-27001.html" class="service-link">İncele <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="service-card">
                         <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
                         <h3>OHSAS 18001</h3>
                         <p>İş Sağlığı ve Güvenliği</p>
-                        <a href="belge-detay/ohsas-18001.html" class="service-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        <a href="belge-detay/ohsas-18001.html" class="service-link">İncele <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="service-card">
                         <div class="service-icon"><i class="fas fa-utensils"></i></div>
                         <h3>HACCP</h3>
                         <p>Gıda Güvenliği Yönetim Sistemi</p>
-                        <a href="belge-detay/haccp.html" class="service-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        <a href="belge-detay/haccp.html" class="service-link">İncele <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon"><i class="fas fa-euro-sign"></i></div>
-                        <h3>CE Marking</h3>
-                        <p>Avrupa Uygunluk İşareti</p>
-                        <a href="belge-detay/ce-marking.html" class="service-link">Detaylı Bilgi <i class="fas fa-arrow-right"></i></a>
+                        <div class="service-icon"><i class="fas fa-plane"></i></div>
+                        <h3>AS 9100</h3>
+                        <p>Havacılık Kalite Yönetim Sistemi</p>
+                        <a href="belge-detay/as-9100.html" class="service-link">İncele <i class="fas fa-arrow-right"></i></a>
                     </div>
+                </div>
+                <div class="text-center" style="margin-top: 40px;">
+                    <a href="hizmetlerimiz.html" class="btn btn-secondary">Tüm Hizmetlerimizi Görün</a>
                 </div>
             </div>
         </section>
@@ -136,18 +684,18 @@
             <div class="container">
                 <div class="about-preview-grid">
                     <div class="about-preview-content">
-                        <h2>Neden AGS Belgelendirme?</h2>
-                        <p>AGS, kalite konusunda denetim ve yöneticilik görevleri yapmış tecrübeli ekibiyle belgelendirme hizmetleri sunmaktadır. Kuruluşumuzun yetkilileri ile görüşerek belgelendirme faaliyetlerinizi başarıyla tamamlayabilirsiniz.</p>
+                        <h2>Neden Kalicert?</h2>
+                        <p>Kalicert Belgelendirme, sektördeki derin tecrübesi ve müşteri odaklı yaklaşımıyla kalite yönetim sistemleri belgelendirmesinde güvenilir bir iş ortağıdır. TURKAK onayı ile belgelendirme süreçlerinizde yasal geçerliliği ve uluslararası tanınırlığı garanti ediyoruz.</p>
                         <ul class="about-features">
                             <li><i class="fas fa-check-circle"></i> Deneyimli ve uzman kadro</li>
-                            <li><i class="fas fa-check-circle"></i> Uluslararası geçerliliğe sahip belgeler</li>
-                            <li><i class="fas fa-check-circle"></i> Hızlı ve güvenilir süreç yönetimi</li>
+                            <li><i class="fas fa-check-circle"></i> Uluslararası geçerliliğe sahip TURKAK onaylı belgeler</li>
+                            <li><i class="fas fa-check-circle"></i> Hızlı, şeffaf ve güvenilir süreç yönetimi</li>
                             <li><i class="fas fa-check-circle"></i> Rekabetçi fiyatlandırma</li>
                         </ul>
                         <a href="hakkimizda.html" class="btn btn-primary">Daha Fazla Bilgi</a>
                     </div>
                     <div class="about-preview-image">
-                        <img src="https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=800" alt="AGS Belgelendirme Ofis">
+                        <img src="https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kalicert Belgelendirme Ofis">
                     </div>
                 </div>
             </div>
@@ -158,8 +706,8 @@
             <div class="container">
                 <div class="cta-content">
                     <h2>Belgelendirme Sürecinizi Hemen Başlatın</h2>
-                    <p>Uzman danışmanlarımız size en uygun çözümü sunmak için hazır.</p>
-                    <a href="iletisim.html" class="btn btn-secondary">İletişime Geçin <i class="fas fa-arrow-right"></i></a>
+                    <p>Uzman danışmanlarımız işletmeniz için en uygun çözümü sunmak üzere hazır.</p>
+                    <a href="iletisim.html" class="btn btn-secondary">Bizimle İletişime Geçin <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -172,14 +720,14 @@
             <div class="container">
                 <div class="footer-grid">
                     <div class="footer-col footer-about">
-                        <h4>AGS BELGELENDİRME</h4>
-                        <p>Uluslararası standartlarda kalite, çevre, iş sağlığı ve gıda güvenliği belgelendirme hizmetleri sunan lider kuruluş.</p>
+                        <h4>KALİCERT BELGELENDİRME</h4>
+                        <p>Uluslararası standartlarda kalite, çevre, iş sağlığı, bilgi güvenliği, gıda ve havacılık gibi birçok sektörde TURKAK onaylı belgelendirme hizmetleri sunan lider kuruluş.</p>
                         <div class="footer-social">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                             <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://wa.me/902164895662" target="_blank" aria-label="WhatsApp" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://wa.me/905335930015" target="_blank" aria-label="WhatsApp" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                     <div class="footer-col footer-links">
@@ -202,17 +750,17 @@
                             <li><a href="belge-detay/iso-27001.html">ISO 27001</a></li>
                             <li><a href="belge-detay/ohsas-18001.html">OHSAS 18001</a></li>
                             <li><a href="belge-detay/haccp.html">HACCP</a></li>
-                            <li><a href="belge-detay/ce-marking.html">CE Marking</a></li>
-                            <li><a href="belge-detay/iso-ts-16949.html">ISO/TS 16949</a></li>
+                            <li><a href="belge-detay/as-9100.html">AS 9100</a></li>
+                            <li><a href="belge-detay/turkak-onayli-belgeler.html">TURKAK Onaylı Belgeler</a></li>
                         </ul>
                     </div>
                     <div class="footer-col footer-contact">
                         <h4>İletişim Bilgileri</h4>
                         <ul class="contact-list">
                             <li><i class="fas fa-map-marker-alt"></i> Bağdat Cad 198 / 10 İdealtepe 34841-Maltepe/İSTANBUL</li>
-                            <li><i class="fas fa-phone-alt"></i> <a href="tel:02164895662">0216 489 56 62</a></li>
-                            <li><i class="fas fa-fax"></i> 0216 489 73 08</li>
-                            <li><i class="fas fa-envelope"></i> <a href="mailto:info@kalicertisg.com">info@kalicertisg.com</a></li>
+                            <li><i class="fas fa-phone-alt"></i> <a href="tel:02164890803">0216 489 08 03</a></li>
+                            <li><i class="fas fa-phone-alt"></i> <a href="tel:02626543101">0262 654 31 01</a></li>
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:info@kalicert.net">info@kalicert.net</a> / <a href="mailto:kalicert@gmail.com">kalicert@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -220,12 +768,161 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2026 Kalicert AGS Belgelendirme. Tüm hakları saklıdır. | <a href="http://www.kalicertisg.com/" target="_blank">kalicertisg.com</a></p>
+                <p>&copy; 2026 Kalicert Belgelendirme. Tüm hakları saklıdır.</p>
             </div>
         </div>
     </footer>
     <!-- FOOTER END -->
 
     <script src="js/main.js"></script>
+    <script>
+        // Slider ve Counter işlevleri
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ana Slider
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            const dotsContainer = document.getElementById('sliderDots');
+            let currentSlide = 0;
+            let slideInterval;
+
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('slider-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = document.querySelectorAll('.slider-dot');
+
+            function goToSlide(index) {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                currentSlide = index;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() { goToSlide((currentSlide + 1) % slides.length); }
+            function prevSlide() { goToSlide((currentSlide - 1 + slides.length) % slides.length); }
+
+            function startSlider() { slideInterval = setInterval(nextSlide, 5000); }
+            function stopSlider() { clearInterval(slideInterval); }
+
+            if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); stopSlider(); startSlider(); });
+            if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); stopSlider(); startSlider(); });
+
+            const sliderContainer = document.querySelector('.hero-slider');
+            if (sliderContainer) {
+                sliderContainer.addEventListener('mouseenter', stopSlider);
+                sliderContainer.addEventListener('mouseleave', startSlider);
+                startSlider();
+            }
+
+            // Counter Animasyonu
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+
+            function animateCounter(counter) {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let count = 0;
+                const increment = target / speed;
+                const updateCounter = () => {
+                    count += increment;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            }
+
+            const observerOptions = { threshold: 0.5 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        if (counter.innerText === '0') animateCounter(counter);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, observerOptions);
+
+            counters.forEach(counter => observer.observe(counter));
+
+            // Haberler Slider
+            const newsWrapper = document.getElementById('newsSliderWrapper');
+            const newsCards = document.querySelectorAll('.news-card');
+            const newsPrev = document.getElementById('newsPrev');
+            const newsNext = document.getElementById('newsNext');
+            const newsDots = document.getElementById('newsDots');
+            
+            if (newsWrapper && newsCards.length > 0) {
+                let newsCurrentIndex = 0;
+                const cardsPerView = window.innerWidth > 992 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+                let totalSlides = Math.ceil(newsCards.length / cardsPerView);
+                const cardWidth = newsCards[0].offsetWidth + 30;
+
+                function createNewsDots() {
+                    newsDots.innerHTML = '';
+                    for (let i = 0; i < totalSlides; i++) {
+                        const dot = document.createElement('span');
+                        dot.classList.add('news-dot');
+                        if (i === 0) dot.classList.add('active');
+                        dot.addEventListener('click', () => goToNewsSlide(i));
+                        newsDots.appendChild(dot);
+                    }
+                }
+
+                function goToNewsSlide(index) {
+                    if (index < 0) index = 0;
+                    if (index >= totalSlides) index = totalSlides - 1;
+                    newsCurrentIndex = index;
+                    newsWrapper.style.transform = `translateX(-${index * cardWidth * cardsPerView}px)`;
+                    
+                    document.querySelectorAll('.news-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+
+                function updateNewsSlider() {
+                    const newCardsPerView = window.innerWidth > 992 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+                    if (newCardsPerView !== cardsPerView) {
+                        location.reload();
+                    }
+                    totalSlides = Math.ceil(newsCards.length / cardsPerView);
+                    createNewsDots();
+                    goToNewsSlide(0);
+                }
+
+                createNewsDots();
+
+                if (newsPrev) {
+                    newsPrev.addEventListener('click', () => {
+                        goToNewsSlide(newsCurrentIndex - 1);
+                    });
+                }
+
+                if (newsNext) {
+                    newsNext.addEventListener('click', () => {
+                        goToNewsSlide(newsCurrentIndex + 1);
+                    });
+                }
+
+                window.addEventListener('resize', updateNewsSlider);
+
+                // Otomatik kaydırma
+                setInterval(() => {
+                    if (newsCurrentIndex < totalSlides - 1) {
+                        goToNewsSlide(newsCurrentIndex + 1);
+                    } else {
+                        goToNewsSlide(0);
+                    }
+                }, 6000);
+            }
+        });
+    </script>
 </body>
 </html>

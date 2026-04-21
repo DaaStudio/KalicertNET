@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim - AGS Belgelendirme</title>
+    <title>İletişim - Kalicert Belgelendirme</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -12,8 +12,8 @@
         <div class="header-top">
             <div class="container header-top-inner">
                 <div class="logo-wrapper">
-                    <a href="index.html" class="logo-link"><img src="images/logo.png" alt="AGS Logo" class="logo-img"></a>
-                    <div class="logo-text"><div class="company-name">AGS BELGELENDİRME</div><div class="company-slogan">Güvenilir Kalite Çözümleri</div></div>
+                    <a href="index.html" class="logo-link"><img src="images/logo.png" alt="Kalicert Logo" class="logo-img"></a>
+                    <div class="logo-text"><div class="company-name">KALİCERT BELGELENDİRME</div><div class="company-slogan">Güvenilir Kalite Çözümleri</div></div>
                 </div>
                 <div class="header-right">
                     <div class="search-wrapper">
@@ -22,7 +22,7 @@
                             <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
                         </form>
                     </div>
-                    <div class="header-phone"><a href="tel:02164895662"><i class="fas fa-phone-alt"></i> <span>0216 489 56 62</span></a></div>
+                    <div class="header-phone"><a href="tel:02164890803"><i class="fas fa-phone-alt"></i> <span>0216 489 08 03</span></a></div>
                 </div>
                 <button class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
             </div>
@@ -45,6 +45,8 @@
                             <li><a href="belge-detay/haccp.html">HACCP</a></li>
                             <li><a href="belge-detay/ce-marking.html">CE Marking</a></li>
                             <li><a href="belge-detay/iso-ts-16949.html">ISO/TS 16949</a></li>
+                            <li><a href="belge-detay/as-9100.html">AS 9100</a></li>
+                            <li><a href="belge-detay/turkak-onayli-belgeler.html">TURKAK Onaylı Belgeler</a></li>
                         </ul>
                     </li>
                     <li class="active"><a href="iletisim.html">İLETİŞİM</a></li>
@@ -54,7 +56,7 @@
     </header>
 
     <main>
-        <section class="page-banner" style="background-image: linear-gradient(rgba(0,40,80,0.75), rgba(0,40,80,0.8)), url('https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&dpr=2');">
+        <section class="page-banner" style="background-image: linear-gradient(90deg, rgba(0,40,80,0.9) 0%, rgba(0,20,40,0.7) 100%), url('https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&dpr=2');">
             <div class="container"><h1>İletişim</h1><p>Size en kısa sürede dönüş yapalım</p></div>
         </section>
 
@@ -65,50 +67,30 @@
                         <h3>İSTANBUL ŞUBESİ</h3>
                         <address>
                             <p><i class="fas fa-map-pin"></i> BAĞDAT CAD 198 / 10 İDEALTEPE 34841-MALTEPE/İSTANBUL</p>
-                            <p><i class="fas fa-phone-alt"></i> TEL: 0216 489 56 62</p>
-                            <p><i class="fas fa-fax"></i> FAX: 0216 489 73 08</p>
-                            <p><i class="fas fa-envelope"></i> info@kalicertisg.com</p>
+                            <p><i class="fas fa-phone-alt"></i> TEL: 0216 489 08 03</p>
+                            <p><i class="fas fa-phone-alt"></i> TEL: 0262 654 31 01</p>
+                            <p><i class="fas fa-envelope"></i> info@kalicert.net</p>
+                            <p><i class="fas fa-envelope"></i> kalicert@gmail.com</p>
                         </address>
                         <div class="contact-social">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                             <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://wa.me/902164895662" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://wa.me/905335930015" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                         </div>
                     </div>
                     <div class="contact-form-card">
                         <h3>Mesaj Gönderin</h3>
                         <form id="contactForm" method="POST">
-                            <!-- CSRF Token (JavaScript ile doldurulacak) -->
                             <input type="hidden" name="csrf_token" id="csrf_token" value="">
-                            <!-- Honeypot - Spam koruması -->
                             <input type="text" name="website" id="website" style="display:none !important" tabindex="-1" autocomplete="off">
                             
-                            <div class="form-group">
-                                <label for="name">ADINIZ: (*)</label>
-                                <input type="text" id="name" name="name" required>
-                                <div class="error-message" id="name-error"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-MAİL: (*)</label>
-                                <input type="email" id="email" name="email" required>
-                                <div class="error-message" id="email-error"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">TEL: (*)</label>
-                                <input type="tel" id="phone" name="phone" required>
-                                <div class="error-message" id="phone-error"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">MESAJINIZ: (*)</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                                <div class="error-message" id="message-error"></div>
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="submitBtn">
-                                <span class="btn-text">MESAJ GÖNDER</span>
-                                <span class="btn-spinner" style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
-                            </button>
+                            <div class="form-group"><label for="name">ADINIZ: (*)</label><input type="text" id="name" name="name" required><div class="error-message" id="name-error"></div></div>
+                            <div class="form-group"><label for="email">E-MAİL: (*)</label><input type="email" id="email" name="email" required><div class="error-message" id="email-error"></div></div>
+                            <div class="form-group"><label for="phone">TEL: (*)</label><input type="tel" id="phone" name="phone" required><div class="error-message" id="phone-error"></div></div>
+                            <div class="form-group"><label for="message">MESAJINIZ: (*)</label><textarea id="message" name="message" rows="5" required></textarea><div class="error-message" id="message-error"></div></div>
+                            <button type="submit" class="btn btn-primary" id="submitBtn"><span class="btn-text">MESAJ GÖNDER</span><span class="btn-spinner" style="display: none;"><i class="fas fa-spinner fa-spin"></i></span></button>
                             <div id="formMessage" class="form-message"></div>
                         </form>
                     </div>
@@ -124,53 +106,14 @@
         <div class="footer-main">
             <div class="container">
                 <div class="footer-grid">
-                    <div class="footer-col footer-about">
-                        <h4>AGS BELGELENDİRME</h4>
-                        <p>Uluslararası standartlarda kalite, çevre, iş sağlığı ve gıda güvenliği belgelendirme hizmetleri sunan lider kuruluş.</p>
-                        <div class="footer-social">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://wa.me/902164895662" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                    <div class="footer-col footer-links">
-                        <h4>Hızlı Erişim</h4>
-                        <ul>
-                            <li><a href="index.html">Anasayfa</a></li>
-                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
-                            <li><a href="hizmetlerimiz.html">Hizmetlerimiz</a></li>
-                            <li><a href="referanslarimiz.html">Referanslarımız</a></li>
-                            <li><a href="kalite-belgeleri.html">Kalite Belgeleri</a></li>
-                            <li><a href="iletisim.html">İletişim</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col footer-belgeler">
-                        <h4>Belgelendirme</h4>
-                        <ul>
-                            <li><a href="belge-detay/iso-9001-2015.html">ISO 9001:2015</a></li>
-                            <li><a href="belge-detay/iso-14001.html">ISO 14001</a></li>
-                            <li><a href="belge-detay/iso-27001.html">ISO 27001</a></li>
-                            <li><a href="belge-detay/ohsas-18001.html">OHSAS 18001</a></li>
-                            <li><a href="belge-detay/haccp.html">HACCP</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col footer-contact">
-                        <h4>İletişim</h4>
-                        <ul class="contact-list">
-                            <li><i class="fas fa-map-marker-alt"></i> Bağdat Cad 198 / 10 İdealtepe 34841-Maltepe/İSTANBUL</li>
-                            <li><i class="fas fa-phone-alt"></i> <a href="tel:02164895662">0216 489 56 62</a></li>
-                            <li><i class="fas fa-fax"></i> 0216 489 73 08</li>
-                            <li><i class="fas fa-envelope"></i> <a href="mailto:info@kalicertisg.com">info@kalicertisg.com</a></li>
-                        </ul>
-                    </div>
+                    <div class="footer-col footer-about"><h4>KALİCERT BELGELENDİRME</h4><p>Uluslararası standartlarda kalite, çevre, iş sağlığı ve gıda güvenliği belgelendirme hizmetleri.</p><div class="footer-social"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="https://wa.me/905335930015" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a></div></div>
+                    <div class="footer-col footer-links"><h4>Hızlı Erişim</h4><ul><li><a href="index.html">Anasayfa</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="hizmetlerimiz.html">Hizmetlerimiz</a></li><li><a href="referanslarimiz.html">Referanslarımız</a></li><li><a href="kalite-belgeleri.html">Kalite Belgeleri</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+                    <div class="footer-col footer-belgeler"><h4>Belgelendirme</h4><ul><li><a href="belge-detay/iso-9001-2015.html">ISO 9001:2015</a></li><li><a href="belge-detay/iso-14001.html">ISO 14001</a></li><li><a href="belge-detay/iso-27001.html">ISO 27001</a></li><li><a href="belge-detay/ohsas-18001.html">OHSAS 18001</a></li><li><a href="belge-detay/haccp.html">HACCP</a></li></ul></div>
+                    <div class="footer-col footer-contact"><h4>İletişim</h4><ul class="contact-list"><li><i class="fas fa-map-marker-alt"></i> Bağdat Cad 198 / 10 İdealtepe 34841-Maltepe/İSTANBUL</li><li><i class="fas fa-phone-alt"></i> <a href="tel:02164890803">0216 489 08 03</a></li><li><i class="fas fa-phone-alt"></i> <a href="tel:02626543101">0262 654 31 01</a></li><li><i class="fas fa-envelope"></i> <a href="mailto:info@kalicert.net">info@kalicert.net</a> / <a href="mailto:kalicert@gmail.com">kalicert@gmail.com</a></li></ul></div>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="container"><p>&copy; 2026 Kalicert AGS Belgelendirme. Tüm hakları saklıdır.</p></div>
-        </div>
+        <div class="footer-bottom"><div class="container"><p>&copy; 2026 Kalicert Belgelendirme. Tüm hakları saklıdır.</p></div></div>
     </footer>
 
     <script src="js/main.js"></script>
